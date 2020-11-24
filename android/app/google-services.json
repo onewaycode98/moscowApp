@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "897906070281",
+    "firebase_url": "https://moscow-20c25.firebaseio.com",
+    "project_id": "moscow-20c25",
+    "storage_bucket": "moscow-20c25.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:897906070281:android:424d4c77e024e3e017f9d8",
+        "android_client_info": {
+          "package_name": "com.example.todoapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "897906070281-9ogso1bqq992od3f3hn08feaj68oh0ie.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC0PnfBJZ0LGRJWGmdLJhl7xvDwxh6DJcE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "897906070281-9ogso1bqq992od3f3hn08feaj68oh0ie.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "897906070281-3tgpmqednqcodqs0djgfvsschv4jf0en.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.todoapp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
