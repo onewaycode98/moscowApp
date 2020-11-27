@@ -26,22 +26,32 @@ class _TaskTileState extends State<TaskTile> {
             decoration: widget.taskData.isDone
                 ? TextDecoration.lineThrough
                 : TextDecoration.none,
-            color: kDarkGrey),
+            color: widget.taskData.isDone
+                ? Color(0xFF5C5D63)
+                : Colors.white.withOpacity(0.9)),
       ),
-      leading: Checkbox(
-        value: widget.taskData.isDone,
-        onChanged: (value) async {
-          setState(() {
-            widget.taskData.toggleIsDone();
-            print(widget.getId);
-          });
-          await taskProvider.updateTask(
-              Task(
-                  isDone: widget.taskData.isDone,
-                  title: widget.taskData.title,
-                  category: widget.taskData.category),
-              widget.getId);
-        },
+      leading: Theme(
+        data: ThemeData(
+          unselectedWidgetColor: Color(0xFF9690EA),
+        ),
+        child: Checkbox(
+          activeColor: Color(0xFF5C5D63),
+          hoverColor: Colors.red,
+          checkColor: kBackground,
+          value: widget.taskData.isDone,
+          onChanged: (value) async {
+            setState(() {
+              widget.taskData.toggleIsDone();
+              print(widget.getId);
+            });
+            await taskProvider.updateTask(
+                Task(
+                    isDone: widget.taskData.isDone,
+                    title: widget.taskData.title,
+                    category: widget.taskData.category),
+                widget.getId);
+          },
+        ),
       ),
     );
   }

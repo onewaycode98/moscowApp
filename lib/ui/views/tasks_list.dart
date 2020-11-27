@@ -20,43 +20,44 @@ class _TasksListState extends State<TasksList> {
   Widget build(BuildContext context) {
     final taskProvider = Provider.of<CRUDModel>(context);
 
-    return Container(
-      child: StreamBuilder<QuerySnapshot>(
-          stream: taskProvider.chooseStream(
-              widget.categoryName, widget.categoryName),
-          builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
-            if (snapshot.hasData) {
-              tasks = snapshot.data.docs
-                  .map((doc) => Task.fromMap(doc.data(), doc.id))
-                  .toList();
+    return StreamBuilder<QuerySnapshot>(
+        stream:
+            taskProvider.chooseStream(widget.categoryName, widget.categoryName),
+        builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.hasData) {
+            tasks = snapshot.data.docs
+                .map((doc) => Task.fromMap(doc.data(), doc.id))
+                .toList();
 
-              return ListView.builder(
-                itemCount: snapshot.data.docs.length,
-                itemBuilder: (buildContext, index) => Dismissible(
-                  key: UniqueKey(),
-                  direction: DismissDirection.endToStart,
-                  background: Container(
-                    color: Colors.red,
-                    child: Padding(
-                      padding: const EdgeInsets.only(right: 20.0),
-                      child: Align(
-                          alignment: Alignment.centerRight,
-                          child: Icon(Icons.delete, color: Colors.white)),
-                    ),
+            return ListView.builder(
+              itemCount: snapshot.data.docs.length,
+              itemBuilder: (buildContext, index) => Dismissible(
+                key: UniqueKey(),
+                direction: DismissDirection.endToStart,
+                background: Container(
+                  color: Colors.red,
+                  child: Padding(
+                    padding: const EdgeInsets.only(right: 20.0),
+                    child: Align(
+                        alignment: Alignment.centerRight,
+                        child: Icon(Icons.delete, color: Colors.white)),
                   ),
-                  onDismissed: (direction) async {
-                    await taskProvider.removeTask(snapshot.data.docs[index].id);
-                  },
+                ),
+                onDismissed: (direction) async {
+                  await taskProvider.removeTask(snapshot.data.docs[index].id);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(3.0),
                   child: TaskTile(
                     taskData: tasks[index],
                     getId: snapshot.data.docs[index].id,
                   ),
                 ),
-              );
-            } else {
-              return Text('fetching');
-            }
-          }),
-    );
+              ),
+            );
+          } else {
+            return Text('fetching');
+          }
+        });
   }
 }

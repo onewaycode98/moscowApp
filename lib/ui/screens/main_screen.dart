@@ -19,7 +19,6 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     currentSelectedIndex = 0;
   }
@@ -28,7 +27,7 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: kBackground,
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
@@ -38,8 +37,8 @@ class _MainScreenState extends State<MainScreen> {
               padding: EdgeInsets.fromLTRB(
                   SizeConfig.blockSizeHorizontal * 6,
                   SizeConfig.blockSizeVertical * 10,
-                  SizeConfig.blockSizeHorizontal * 6,
-                  SizeConfig.blockSizeVertical * 4),
+                  SizeConfig.blockSizeHorizontal * 5,
+                  SizeConfig.blockSizeVertical * 3),
               child: Column(children: <Widget>[
                 Container(
                   width: double.infinity,
@@ -47,7 +46,7 @@ class _MainScreenState extends State<MainScreen> {
                     'Your tasks',
                     style: TextStyle(
                         fontSize: SizeConfig.blockSizeVertical * 4.5,
-                        color: kDarkText,
+                        color: Colors.white,
                         fontWeight: FontWeight.w700,
                         letterSpacing: -SizeConfig.blockSizeVertical * 0.2),
                   ),
@@ -59,7 +58,7 @@ class _MainScreenState extends State<MainScreen> {
                     Text(
                       'Category',
                       style: TextStyle(
-                        color: kDarkText,
+                        color: Colors.white,
                         fontSize: SizeConfig.blockSizeVertical * 2.5,
                         fontWeight: FontWeight.w700,
                       ),
@@ -92,17 +91,24 @@ class _MainScreenState extends State<MainScreen> {
           Expanded(
               child: Padding(
             padding: EdgeInsets.symmetric(
-              horizontal: SizeConfig.blockSizeHorizontal * 4,
-            ),
-            child: TasksList(
-              categoryName: categoryName,
+                horizontal: SizeConfig.blockSizeHorizontal * 6),
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20.0),
+                color: Color(0xFF25262D),
+              ),
+              child: TasksList(
+                categoryName: categoryName,
+              ),
             ),
           )),
           Padding(
-            padding: EdgeInsets.only(bottom: SizeConfig.blockSizeVertical * 8),
-            child: ButtonTheme(
-              minWidth: SizeConfig.blockSizeHorizontal * 50,
-              height: SizeConfig.blockSizeVertical * 6,
+            padding: EdgeInsets.only(
+              bottom: SizeConfig.blockSizeVertical * 6,
+              top: SizeConfig.blockSizeVertical * 3,
+            ),
+            child: Container(
+              height: 55.0,
               child: RaisedButton(
                 onPressed: () async {
                   var selectedButton = await Navigator.of(context).push(
@@ -124,22 +130,32 @@ class _MainScreenState extends State<MainScreen> {
                     }
                   });
                 },
-                elevation: 0.5,
-                color: kDarkText,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(30.0),
-                ),
-                child: Text(
-                  "Add new task",
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: SizeConfig.blockSizeVertical * 1.8,
-                    fontWeight: FontWeight.w500,
+                    borderRadius: BorderRadius.circular(80.0)),
+                padding: EdgeInsets.all(0.0),
+                child: Ink(
+                  decoration: BoxDecoration(
+                    gradient: kGradient,
+                    borderRadius: BorderRadius.circular(30.0),
+                  ),
+                  child: Container(
+                    constraints: BoxConstraints(
+                        maxWidth: SizeConfig.blockSizeHorizontal * 60,
+                        minHeight: 50.0),
+                    alignment: Alignment.center,
+                    child: Text(
+                      "Add new task",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: SizeConfig.blockSizeVertical * 1.8,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
                   ),
                 ),
               ),
             ),
-          )
+          ),
         ],
       ),
     );
